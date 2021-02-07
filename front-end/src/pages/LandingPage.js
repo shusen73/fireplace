@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Peer from "peerjs";
 import { v4 as uuidv4 } from "uuid";
 import { useHistory } from "react-router-dom";
 
@@ -10,8 +9,8 @@ const LandingPage = ({ localStream, setLocalStream, setRemoteStream }) => {
   const [remotePeerId, setRemotePeerId] = useState("");
   let history = useHistory();
   useEffect(() => {
-    setPeer(new Peer(uuidv4()));
-  }, []);
+    setPeer(new window.Peer(uuidv4()));
+  }, [history, setLocalStream, setRemoteStream]);
 
   useEffect(() => {
     if (peer == null) return;

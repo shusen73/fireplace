@@ -41,7 +41,6 @@ const VideoRoom = ({ localStream, remoteStream }) => {
             alignItems: "center",
             gridColumn: "1/4",
             gridRow: "1/4",
-            alignItems: "center",
           }}
           bg="muted"
         >
@@ -53,7 +52,6 @@ const VideoRoom = ({ localStream, remoteStream }) => {
             alignItems: "center",
             gridColumn: "1/2",
             gridRow: "3/4",
-            alignItems: "center",
             margin: "auto",
           }}
           bg="muted"
