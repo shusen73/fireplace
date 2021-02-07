@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ThemeProvider } from "theme-ui";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import theme from "./theme";
 import LandingPage from "./pages/LandingPage";

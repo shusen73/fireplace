@@ -24,7 +24,7 @@ const LandingPage = ({ localStream, setLocalStream, setRemoteStream }) => {
         history.push("./video-room");
       });
     });
-  }, [peer]);
+  }, [peer, history, setLocalStream, setRemoteStream]);
   const getUserMedia = async () => {
     let stream = null;
     try {
