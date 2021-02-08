@@ -34,6 +34,8 @@ const VideoRoom = ({ localStream, remoteStream }) => {
           gridTemplateRows: "repeat(3,1fr)",
           minHeight: "100vh",
           maxHeight: "100vh",
+          minWidth: "100vw",
+          maxWidth: "100vw",
         }}
       >
         <Flex
@@ -42,9 +44,12 @@ const VideoRoom = ({ localStream, remoteStream }) => {
             gridColumn: "1/4",
             gridRow: "1/4",
           }}
-          bg="muted"
         >
-          <Video srcObject={remoteStream} autoPlay sx={{ width: "100%" }} />
+          <Video
+            srcObject={remoteStream}
+            autoPlay
+            sx={{ width: "100%", maxHeight: "100%" }}
+          />
         </Flex>
         <Flex
           id="remoteVideo"
@@ -54,7 +59,6 @@ const VideoRoom = ({ localStream, remoteStream }) => {
             gridRow: "3/4",
             margin: "auto",
           }}
-          bg="muted"
         >
           <Video srcObject={localStream} autoPlay sx={{ width: "100%" }} />
         </Flex>

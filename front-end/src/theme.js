@@ -2,10 +2,9 @@
 const theme = {
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
   fonts: {
-    body:
-      'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
-    heading: "inherit",
-    monospace: "Menlo, monospace",
+    body: "Roboto, sans-serif",
+    heading: "Montserrat, sans-serif",
+    monospace: '"Roboto Mono", monospace',
   },
   fontSizes: [12, 14, 16, 20, 24, 32, 48, 64, 96],
   fontWeights: {
@@ -18,12 +17,11 @@ const theme = {
     heading: 1.125,
   },
   colors: {
-    text: "#1D3557",
-    background: "#F1FAEE",
-    primary: "#457B9D",
-    secondary: "#A8DADC",
-    accent: "#E63946",
-    muted: "#f1faee",
+    text: "#ffffff",
+    background: "#000000",
+    primary: "#ffbf47",
+    secondary: "#30c",
+    muted: "#f6f6f6",
   },
   styles: {
     root: {
