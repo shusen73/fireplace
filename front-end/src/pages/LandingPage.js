@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 
-import { Text, Box, Flex, Button, Input, Heading, Divider } from "theme-ui";
+import { Text, Box, Flex, Button, Input } from "theme-ui";
 
 const LandingPage = ({
   peer,
   localStream,
-  remoteStream,
+  // remoteStream,
   setRemoteStream,
   remotePeerId,
   setRemotePeerId,

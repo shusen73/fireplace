@@ -1,30 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { ThemeProvider } from "theme-ui";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  useHistory,
-} from "react-router-dom";
-import Peer from "peerjs";
+import { Switch, Route, useHistory } from "react-router-dom";
 import {} from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import theme from "./theme";
 import LandingPage from "./pages/LandingPage";
 import VideoRoom from "./pages/VideoRoom";
-
 const App = () => {
   const history = useHistory();
-  const [localUserMedia, setLocalUserMedia] = useState();
-  const [localDisplayMedia, setLocalDisplayMedia] = useState();
+  const [, setLocalUserMedia] = useState();
+  // const [localDisplayMedia, setLocalDisplayMedia] = useState();
   const [localStream, setLocalStream] = useState();
   const [remoteStream, setRemoteStream] = useState();
-  const [peer, setPeer] = useState(new Peer());
+  const [peer, setPeer] = useState();
   const [remotePeerId, setRemotePeerId] = useState("");
 
   useEffect(() => {
     (async () => {
-      setPeer(new Peer(uuidv4()));
+      setPeer(new window.Peer(uuidv4()));
       const userMedia = await getUserMedia();
       setLocalUserMedia(userMedia);
       setLocalStream(userMedia);
@@ -41,7 +34,7 @@ const App = () => {
       });
       history.push("/video-room");
     });
-  }, [localStream, peer]);
+  }, [localStream, peer, history]);
 
   const getUserMedia = async () => {
     let stream = null;

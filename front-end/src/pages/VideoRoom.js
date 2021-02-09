@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-import Peer from "peerjs";
+import React, { useEffect } from "react";
 import { Label, Radio } from "theme-ui";
 
 import Videos from "../components/Videos";
 const VideoRoom = ({
   localStream,
   remoteStream,
-  setLocalStream,
+  // setLocalStream,
   peer,
   remotePeerId,
 }) => {
@@ -53,19 +51,19 @@ const Controls = ({ onScreenShare }) => {
   );
 };
 
-const getUserMedia = async () => {
-  let stream = null;
-  try {
-    stream = await window.navigator.mediaDevices.getUserMedia({
-      video: true,
-      audio: true,
-    });
-  } catch (err) {
-    /* handle the error */
-    console.log(err);
-  }
-  return stream;
-};
+// const getUserMedia = async () => {
+// let stream = null;
+// try {
+// stream = await window.navigator.mediaDevices.getUserMedia({
+// video: true,
+// audio: true,
+// });
+// } catch (err) {
+// [> handle the error <]
+// console.log(err);
+// }
+// return stream;
+// };
 
 const getDisplayMedia = async () => {
   let stream = null;
@@ -91,7 +89,7 @@ function replaceStream(peerConnections, mediaStream) {
         // sender.replaceTrack(mediaStream.getAudioTracks()[0]);
         // }
         // }
-        if (sender.track.kind == "video") {
+        if (sender.track.kind === "video") {
           if (mediaStream.getVideoTracks().length > 0) {
             sender.replaceTrack(mediaStream.getVideoTracks()[0]);
           }
