@@ -1,51 +1,28 @@
 import React, { useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import { useHistory } from "react-router-dom";
 
 import { Text, Box, Flex, Button, Input, Heading, Divider } from "theme-ui";
 
-const LandingPage = ({ localStream, setLocalStream, setRemoteStream }) => {
-  const [peer, setPeer] = useState(null);
-  const [remotePeerId, setRemotePeerId] = useState("");
+const LandingPage = ({
+  peer,
+  localStream,
+  remoteStream,
+  setRemoteStream,
+  remotePeerId,
+  setRemotePeerId,
+}) => {
   let history = useHistory();
-  useEffect(() => {
-    setPeer(new window.Peer(uuidv4()));
-  }, [history, setLocalStream, setRemoteStream]);
 
-  useEffect(() => {
-    if (peer == null) return;
-    peer.on("call", async (call) => {
-      // get user media
-      const stream = await getUserMedia();
-      setLocalStream(stream);
-      call.answer(stream); // Answer the call with an A/V stream.
-      call.on("stream", (remoteStream) => {
-        setRemoteStream(remoteStream);
-        history.push("./video-room");
-      });
-    });
-  }, [peer, history, setLocalStream, setRemoteStream]);
-  const getUserMedia = async () => {
-    let stream = null;
-    try {
-      stream = await navigator.mediaDevices.getUserMedia({
-        video: true,
-        audio: true,
-      });
-    } catch (err) {
-      /* handle the error */
-      console.log(err);
-    }
-    return stream;
-  };
-
-  const mediaCallRemote = async () => {
-    let stream = await getUserMedia();
-    setLocalStream(stream);
-    var call = peer.call(remotePeerId, stream);
-    call.on("stream", function (remoteStream) {
+  const mediaCallRemote = async (
+    peer,
+    remotePeerId,
+    localStream,
+    setRemoteStream
+  ) => {
+    var call = await peer.call(remotePeerId, localStream);
+    call.on("stream", function (stream) {
       // Show stream in some video/canvas element.
-      setRemoteStream(remoteStream);
+      setRemoteStream(stream);
       history.push("/video-room");
     });
   };
@@ -81,15 +58,15 @@ const LandingPage = ({ localStream, setLocalStream, setRemoteStream }) => {
             my={3}
             sx={{ textAlign: "center", fontSize: 5 }}
           ></Input>
-          <Flex sx={{ alignItems: "center" }}>
-            <Button
-              onClick={() => mediaCallRemote(peer, remotePeerId, localStream)}
-              my={3}
-              sx={{ fontSize: 5, width: ["100%"] }}
-            >
-              Go
-            </Button>
-          </Flex>
+          <Button
+            onClick={() =>
+              mediaCallRemote(peer, remotePeerId, localStream, setRemoteStream)
+            }
+            my={3}
+            sx={{ fontSize: 5, width: ["100%"] }}
+          >
+            Go
+          </Button>
         </Box>
       </Flex>
     </>

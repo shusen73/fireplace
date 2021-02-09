@@ -20,8 +20,8 @@ const theme = {
     text: "#ffffff",
     background: "#000000",
     primary: "#ffbf47",
-    secondary: "#30c",
-    muted: "#f6f6f6",
+    // secondary: "#30c",
+    // muted: "#f6f6f6",
   },
   styles: {
     root: {
