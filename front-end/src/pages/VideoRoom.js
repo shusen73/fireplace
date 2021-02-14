@@ -1,10 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import Videos from "../components/Videos";
-const VideoRoom = ({
-  localStream,
-  remoteStream,
-}) => {
+const VideoRoom = ({ localStream, remoteStream }) => {
   return (
     <>
       <Videos localStream={localStream} remoteStream={remoteStream} />
@@ -13,8 +10,6 @@ const VideoRoom = ({
 };
 
 export default VideoRoom;
-
-
 
 // const getUserMedia = async () => {
 // let stream = null;
