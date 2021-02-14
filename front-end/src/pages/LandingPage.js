@@ -13,15 +13,9 @@ const LandingPage = ({
 }) => {
   let history = useHistory();
 
-  const mediaCallRemote = async (
-    peer,
-    remotePeerId,
-    localStream,
-    setRemoteStream
-  ) => {
-
-    const displayMedia = await getDisplayMedia()
-    setLocalStream(displayMedia)
+  const mediaCallRemote = async (peer, remotePeerId, setRemoteStream) => {
+    const displayMedia = await getDisplayMedia();
+    setLocalStream(displayMedia);
 
     var call = await peer.call(remotePeerId, displayMedia);
     call.on("stream", function (stream) {
@@ -63,9 +57,7 @@ const LandingPage = ({
             sx={{ textAlign: "center", fontSize: 4 }}
           ></Input>
           <Button
-            onClick={() =>
-              mediaCallRemote(peer, remotePeerId, localStream, setRemoteStream)
-            }
+            onClick={() => mediaCallRemote(peer, remotePeerId, setRemoteStream)}
             my={3}
             sx={{ fontSize: 5, width: ["100%"] }}
           >
@@ -79,13 +71,11 @@ const LandingPage = ({
 export default LandingPage;
 
 const getDisplayMedia = async () => {
-  console.log('get user media')
   let stream = null;
   try {
     stream = await navigator.mediaDevices.getDisplayMedia({
       video: true,
     });
-    console.log(stream);
   } catch (err) {
     /* handle the error */
     console.log(err);
