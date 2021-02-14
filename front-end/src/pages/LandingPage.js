@@ -6,7 +6,7 @@ import { Text, Box, Flex, Button, Input } from "theme-ui";
 const LandingPage = ({
   peer,
   localStream,
-  // remoteStream,
+  setLocalStream,
   setRemoteStream,
   remotePeerId,
   setRemotePeerId,
@@ -19,7 +19,11 @@ const LandingPage = ({
     localStream,
     setRemoteStream
   ) => {
-    var call = await peer.call(remotePeerId, localStream);
+
+    const displayMedia = await getDisplayMedia()
+    setLocalStream(displayMedia)
+
+    var call = await peer.call(remotePeerId, displayMedia);
     call.on("stream", function (stream) {
       // Show stream in some video/canvas element.
       setRemoteStream(stream);
@@ -56,7 +60,7 @@ const LandingPage = ({
               setRemotePeerId(e.target.value);
             }}
             my={3}
-            sx={{ textAlign: "center", fontSize: 5 }}
+            sx={{ textAlign: "center", fontSize: 4 }}
           ></Input>
           <Button
             onClick={() =>
@@ -73,3 +77,18 @@ const LandingPage = ({
   );
 };
 export default LandingPage;
+
+const getDisplayMedia = async () => {
+  console.log('get user media')
+  let stream = null;
+  try {
+    stream = await navigator.mediaDevices.getDisplayMedia({
+      video: true,
+    });
+    console.log(stream);
+  } catch (err) {
+    /* handle the error */
+    console.log(err);
+  }
+  return stream;
+};

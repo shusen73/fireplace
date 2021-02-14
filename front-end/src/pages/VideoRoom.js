@@ -1,34 +1,12 @@
 import React, { useEffect } from "react";
-import { Label, Radio } from "theme-ui";
 
 import Videos from "../components/Videos";
 const VideoRoom = ({
   localStream,
   remoteStream,
-  // setLocalStream,
-  peer,
-  remotePeerId,
 }) => {
-  const onScreenShare = async () => {
-    const stream = await getDisplayMedia();
-    localStream.removeTrack(localStream.getVideoTracks()[0]);
-    localStream.addTrack(stream.getVideoTracks()[0]);
-    //get connection
-    console.log(remotePeerId);
-    console.log(peer.connections);
-
-    replaceStream(peer.connections, stream);
-  };
-
-  useEffect(() => {
-    (async () => {})();
-  }, []);
-
-  useEffect(() => {});
-
   return (
     <>
-      <Controls onScreenShare={onScreenShare} />
       <Videos localStream={localStream} remoteStream={remoteStream} />
     </>
   );
@@ -36,20 +14,7 @@ const VideoRoom = ({
 
 export default VideoRoom;
 
-const Controls = ({ onScreenShare }) => {
-  return (
-    <>
-      <Label>
-        <Radio name="videoSource" value="true" defaultChecked={true} />
-        Camera
-      </Label>
-      <Label>
-        <Radio name="videoSource" value="false" onChange={onScreenShare} />
-        Screen
-      </Label>
-    </>
-  );
-};
+
 
 // const getUserMedia = async () => {
 // let stream = null;
@@ -65,21 +30,21 @@ const Controls = ({ onScreenShare }) => {
 // return stream;
 // };
 
-const getDisplayMedia = async () => {
-  let stream = null;
-  try {
-    stream = await navigator.mediaDevices.getDisplayMedia({
-      video: true,
-    });
-    console.log(stream);
-  } catch (err) {
-    /* handle the error */
-    console.log(err);
-  }
-  return stream;
-};
+// const getDisplayMedia = async () => {
+//   let stream = null;
+//   try {
+//     stream = await navigator.mediaDevices.getDisplayMedia({
+//       video: true,
+//     });
+//     console.log(stream);
+//   } catch (err) {
+//     /* handle the error */
+//     console.log(err);
+//   }
+//   return stream;
+// };
 
-function replaceStream(peerConnections, mediaStream) {
+/* function replaceStream(peerConnections, mediaStream) {
   Object.keys(peerConnections).forEach((key) => {
     let connection = peerConnections[key];
     connection.forEach((c) => {
@@ -97,4 +62,4 @@ function replaceStream(peerConnections, mediaStream) {
       }
     });
   });
-}
+} */

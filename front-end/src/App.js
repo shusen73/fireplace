@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { ThemeProvider } from "theme-ui";
 import { Switch, Route, useHistory } from "react-router-dom";
-import {} from "react-router-dom";
+import { } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import theme from "./theme";
 import LandingPage from "./pages/LandingPage";
 import VideoRoom from "./pages/VideoRoom";
 const App = () => {
   const history = useHistory();
-  const [, setLocalUserMedia] = useState();
-  // const [localDisplayMedia, setLocalDisplayMedia] = useState();
   const [localStream, setLocalStream] = useState();
   const [remoteStream, setRemoteStream] = useState();
   const [peer, setPeer] = useState();
@@ -18,9 +16,7 @@ const App = () => {
   useEffect(() => {
     (async () => {
       setPeer(new window.Peer(uuidv4()));
-      const userMedia = await getUserMedia();
-      setLocalUserMedia(userMedia);
-      setLocalStream(userMedia);
+      
     })();
   }, []);
 
@@ -36,19 +32,6 @@ const App = () => {
     });
   }, [localStream, peer, history]);
 
-  const getUserMedia = async () => {
-    let stream = null;
-    try {
-      stream = await window.navigator.mediaDevices.getUserMedia({
-        video: true,
-        audio: true,
-      });
-    } catch (err) {
-      /* handle the error */
-      console.log(err);
-    }
-    return stream;
-  };
   return (
     <ThemeProvider theme={theme}>
       <Switch>
@@ -58,6 +41,7 @@ const App = () => {
             localStream={localStream}
             remoteStream={remoteStream}
             setRemoteStream={setRemoteStream}
+            setLocalStream={setLocalStream}
             remotePeerId={remotePeerId}
             setRemotePeerId={setRemotePeerId}
           />
@@ -75,3 +59,18 @@ const App = () => {
 };
 
 export default App;
+
+// const getUserMedia = async () => {
+//   let stream = null;
+//   try {
+//     stream = await window.navigator.mediaDevices.getUserMedia({
+//       video: true,
+//       audio: true,
+//     });
+//   } catch (err) {
+//     /* handle the error */
+//     console.log(err);
+//   }
+//   return stream;
+// };
+
