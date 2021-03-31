@@ -17,7 +17,9 @@ interface Props {
 
 function App() {
   const [showVideos, setShowVideos] = useState(false);
-  const [peer, setPeer] = useState(new Peer(uuidv4()));
+  const [peer, setPeer] = useState(
+    new Peer(Math.random().toString(36).substring(7))
+  );
   const [localStream, setLocalStream] = useState(new MediaStream());
   const [remoteStream, setRemoteStream] = useState(new MediaStream());
 
